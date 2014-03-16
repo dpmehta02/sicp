@@ -51,6 +51,6 @@
 
 ; Applicative eval: Infinite loop. The interpreter will try to simplify the 
 ; expression as much as possible before evaluating, so it will continue to 
-; return (test 0 (p)), because p can't be simplified.
+; return (test 0 (p)), because p recursively calls itself with no simplification.
 ; Normal eval: 0, because evaluates step by step. If x = 0 is true, return 0 
 ; and do not try to evaluate p.
