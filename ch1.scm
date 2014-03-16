@@ -1,0 +1,6 @@
+(define (sum-of-squares a b c)
+  (cond (and (< a b) (< a c)) (+ (* b b) (* c c))
+        (and (< a b) (< a c)) (+ (* b b) (* c c))
+        (                     (+ (* b b) (* c c))
+  )
+)
