@@ -89,3 +89,14 @@
 ; interation, creating an infinite loop. The if-then logic only evaluates the
 ; first argument, so when the predicate condition is satisfied, the then clause
 ; is run and the else is ignored.
+
+; Ex 1.7 Guesses for very small values are innacuratethe precision cannot be
+; specific enough. Guesses for large values can top out on accuracy by
+; alternating between two guesses without becoming more accurate, basically
+; creating an infinite loop that will not get any more accurate.
+
+; http://www.kendyck.com/archives/2005/03/20/solution-to-sicp-exercise-17/
+; Yes, this works better for both large and small numbers
+
+; Ex 1.8
+
