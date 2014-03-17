@@ -1,39 +1,39 @@
-; Ex 1.3: Define a procedure that takes three numbers as arguments and returns
+; Ex 1.3: DEFINE a procedure that takes three numbers as arguments and returns
 ; the sum of the squares of the two larger numbers. 
   
-(define (square x) (* x x)) 
+(DEFINE (square x) (* x x)) 
 
-(define (sum-of-squares x y) (+ (square x) (square y))) 
+(DEFINE (sum-of-squares x y) (+ (square x) (square y))) 
 
-(define (sum-of-squared-largest-two x y z) 
+(DEFINE (sum-of-squared-largest-two x y z) 
         (cond ((= (min x y z) x) (sum-of-squares y z))
               ((= (min x y z) y) (sum-of-squares x z))
               ((= (min x y z) z) (sum-of-squares x y))))
   
-; Testing
-(newline)
-(display (sum-of-squared-largest-two 1 3 4)) (newline)
-(display (sum-of-squared-largest-two 4 1 3)) (newline)
-(display (sum-of-squared-largest-two 3 4 1)) (newline)
+; ; Testing
+; (newline)
+; (display (sum-of-squared-largest-two 1 3 4)) (newline)
+; (display (sum-of-squared-largest-two 4 1 3)) (newline)
+; (display (sum-of-squared-largest-two 3 4 1)) (newline)
 
 ; Ex 1.4
-; Defines a function that takes two inputs and adds the first to the absolute
+; DEFINEs a function that takes two inputs and adds the first to the absolute
 ; value of the second with the following trick: if b is positive, the function
 ; adds a and b; if b is negative, the function subtracts b from a, in effect 
 ; adding them together
 
-; (define (a-plus-abs-b a b)
+; (DEFINE (a-plus-abs-b a b)
 ;   ((if (> b 0) + -) a b))
 
 
 ; Ex 1.5
 ; Ben Bitdiddle has invented a test to determine whether the interpreter he is
 ; faced with is using applicative-order evaluation or normal-order evaluation.
-; He defines the following two procedures:
+; He DEFINEs the following two procedures:
 
-; (define (p) (p))
+; (DEFINE (p) (p))
 
-; (define (test x y)
+; (DEFINE (test x y)
 ;   (if (= x 0)
 ;       0
 ;       y))
@@ -58,11 +58,11 @@
 
 
 ; Exercise 1.6.  Alyssa P. Hacker doesn't see why if needs to be provided as a
-; special form. ``Why can't I just define it as an ordinary procedure in terms
+; special form. ``Why can't I just DEFINE it as an ordinary procedure in terms
 ; of cond?'' she asks. Alyssa's friend Eva Lu Ator claims this can indeed be
-; done, and she defines a new version of if:
+; done, and she DEFINEs a new version of if:
 
-; (define (new-if predicate then-clause else-clause)
+; (DEFINE (new-if predicate then-clause else-clause)
 ;   (cond (predicate then-clause)
 ;         (else else-clause)))
 
@@ -76,7 +76,7 @@
 
 ; Delighted, Alyssa uses new-if to rewrite the square-root program:
 
-; (define (sqrt-iter guess x)
+; (DEFINE (sqrt-iter guess x)
 ;   (new-if (good-enough? guess x)
 ;           guess
 ;           (sqrt-iter (improve guess x)
@@ -100,3 +100,23 @@
 
 ; Ex 1.8
 
+; Initialize our guess
+(DEFINE (cube-root x) 
+ (cube-root-iter 1.0 x))
+
+; Recursively improve the guess until it's good enough
+(DEFINE (cube-root-iter guess x) 
+ (if (good-enough? guess x) 
+     guess 
+     (cube-root-iter (improve guess x) 
+                     x))) 
+
+(DEFINE (good-enough? guess x) 
+ (< (abs (- (cube guess) x)) 0.001))
+
+; Newton's method
+(DEFINE (improve guess x) 
+ (/ (+ (/ x (square guess)) (* 2 guess)) 3))
+
+(DEFINE (cube x) 
+ (* x x x)) 
