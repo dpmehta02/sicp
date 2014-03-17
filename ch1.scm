@@ -25,6 +25,7 @@
 ; (define (a-plus-abs-b a b)
 ;   ((if (> b 0) + -) a b))
 
+
 ; Ex 1.5
 ; Ben Bitdiddle has invented a test to determine whether the interpreter he is
 ; faced with is using applicative-order evaluation or normal-order evaluation.
@@ -54,3 +55,37 @@
 ; return (test 0 (p)), because p recursively calls itself with no simplification.
 ; Normal eval: 0, because evaluates step by step. If x = 0 is true, return 0 
 ; and do not try to evaluate p.
+
+
+; Exercise 1.6.  Alyssa P. Hacker doesn't see why if needs to be provided as a
+; special form. ``Why can't I just define it as an ordinary procedure in terms
+; of cond?'' she asks. Alyssa's friend Eva Lu Ator claims this can indeed be
+; done, and she defines a new version of if:
+
+; (define (new-if predicate then-clause else-clause)
+;   (cond (predicate then-clause)
+;         (else else-clause)))
+
+; Eva demonstrates the program for Alyssa:
+
+; (new-if (= 2 3) 0 5)
+; 5
+
+; (new-if (= 1 1) 0 5)
+; 0
+
+; Delighted, Alyssa uses new-if to rewrite the square-root program:
+
+; (define (sqrt-iter guess x)
+;   (new-if (good-enough? guess x)
+;           guess
+;           (sqrt-iter (improve guess x)
+;                      x)))
+
+; What happens when Alyssa attempts to use this to compute square roots? Explain.
+
+; Infinite loop. Scheme's applicative-order evaluation evaluates all arguments
+; before proceeding, and thus Alyssa's new function calls itself during every
+; interation, creating an infinite loop. The if-then logic only evaluates the
+; first argument, so when the predicate condition is satisfied, the then clause
+; is run and the else is ignored.
