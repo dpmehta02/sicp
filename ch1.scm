@@ -209,5 +209,36 @@
       (foo-iter (+ a (* 2 b) (* 3 c)) a b (- n 1)))) 
   (if (< n 3) 
     n 
-    (foo-iter 2 1 0 n))) 
+    (foo-iter 2 1 0 n)))
 
+; Exercise 1.12.  The following pattern of numbers is called Pascal's triangle.
+; The numbers at the edge of the triangle are all 1, and each number inside the
+; triangle is the sum of the two numbers above it.35 Write a procedure that
+; computes elements of Pascal's triangle by means of a recursive process.
+
+(define (pascal-triangle row col)
+  (cond ((> col row) 0)
+        ((< col 0) 0)
+        ((= col 1) 1)
+        ((+ (pascal-triangle (- row 1) (- col 1))
+            (pascal-triangle (- row 1) col)))))
+
+; Exercise 1.13
+; http://www.billthelizard.com/2009/12/sicp-exercise-113-fibonacci-and-golden.html
+
+; Ex 1.14: http://community.schemewiki.org/?sicp-ex-1.14
+; Ex 1.15 a. 5, Space = O(log(a)), Time = O(log(a))
+
+;Ex 1.16
+
+  
+; Ex 1.16 
+  
+(define (fast-expt b n) 
+ (define (iter a b n) 
+   (cond ((= n 0) a) 
+         ((even? n) (iter a (square b) (/ n 2))) 
+         (else (iter (* a b) b (- n 1))))) 
+ (iter 1 b n)) 
+
+(define (square x) (* x x)) 
