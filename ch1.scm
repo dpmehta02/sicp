@@ -401,3 +401,24 @@
 ; 7
 
 ; 1.22
+(define (search-for-primes a n)
+  (search-for-primes-helper (next-odd a) 0 n))
+ 
+(define (search-for-primes-helper a found n)
+  (if (= found n)
+      0
+      (search-for-primes-helper (+ a 2)
+                                (if (timed-prime-test a)
+                                    (+ found 1)
+                                    found)
+                                n)))
+ 
+(define (next-odd n)
+  (if (even? n)
+      (+ n 1)
+      n))
+ 
+(define (even? n)
+  (= 0 (remainder n 2)))
+
+; 1.23-28 not very relevant
